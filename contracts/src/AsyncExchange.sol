@@ -72,11 +72,6 @@ contract AsyncExchange {
         totalProportion[depositToken][withdrawToken] += proportion;
     }
 
-    function undoDeposit(address depositToken, address withdrawToken, uint256 amount) external virtual onlyOncePerBlock {
-        require(userProportion[depositToken][withdrawToken][msg.sender] > 0, "Async Exchange: user does not have enough credit to undo deposit");
-        require(totalProportion[depositToken][withdrawToken] > 0, "Async Exchange: there is no available proportion to undo deposit");
-    }
-
     function withdraw(address depositToken, address withdrawToken, uint256 amount) external virtual onlyOncePerBlock {
         require(amount > 0, "Async Exchange: please inform the amount to withdraw");
         require(
